@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
+  <NamespaceUris>
+    <Uri>urn:BeckhoffAutomation:TcOpcUaServer</Uri>
+    <Uri>urn:BeckhoffAutomation:Ua:PLC1</Uri>
+    <Uri>urn:your-custom-namespace</Uri>
+  </NamespaceUris>
+  <Aliases>
+    <Alias Alias="Boolean">i=1</Alias>
+    <Alias Alias="Byte">i=3</Alias>
+    <Alias Alias="Int16">i=4</Alias>
+    <Alias Alias="Float">i=10</Alias>
+    <Alias Alias="String">i=12</Alias>
+    <Alias Alias="ByteString">i=15</Alias>
+    <Alias Alias="Organizes">i=35</Alias>
+    <Alias Alias="HasTypeDefinition">i=40</Alias>
+    <Alias Alias="HasProperty">i=46</Alias>
+    <Alias Alias="HasComponent">i=47</Alias>
+  </Aliases>
+
+  <!-- PLC Root Node -->
+  <UAObject NodeId="ns=1;s=PLC1" BrowseName="2:PLC1" ParentNodeId="i=85">
+    <DisplayName>PLC1</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">ns=1;i=1000</Reference>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=TBIOSMB2DELTAV</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;s=TDELTAV2BIOSMB</Reference>
+    </References>
+  </UAObject>
+
+  <!-- First Object Node -->
+  <UAObject NodeId="ns=2;s=TBIOSMB2DELTAV" BrowseName="2:TBIOSMB2DELTAV" ParentNodeId="ns=1;s=PLC1">
+    <DisplayName>TBIOSMB2DELTAV</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+      <Reference ReferenceType="Organizes" IsForward="false">ns=1;s=PLC1</Reference>
+    </References>
+  </UAObject>
+
+  <!-- Second Object Node -->
+  <UAObject NodeId="ns=2;s=TDELTAV2BIOSMB" BrowseName="2:TDELTAV2BIOSMB" ParentNodeId="ns=1;s=PLC1">
+    <DisplayName>TDELTAV2BIOSMB</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+      <Reference ReferenceType="Organizes" IsForward="false">ns=1;s=PLC1</Reference>
+    </References>
+  </UAObject>
+
+  <!-- Variables for TBIOSMB2DELTAV -->
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.PH_1" BrowseName="2:PH_1" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+    <DisplayName>PH_1</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+    </References>
+    <Value>4.4179</Value>
+  </UAVariable>
+
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.PH_2" BrowseName="2:PH_2" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+    <DisplayName>PH_2</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+    </References>
+    <Value>4.4179</Value>
+  </UAVariable>
+
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.PH_3" BrowseName="2:PH_3" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+    <DisplayName>PH_3</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+    </References>
+    <Value>4.4179</Value>
+  </UAVariable>
+
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.PH_4" BrowseName="2:PH_4" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+    <DisplayName>PH_4</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+    </References>
+    <Value>4.4179</Value>
+  </UAVariable>
+
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.COND_1" BrowseName="2:COND_1" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+    <DisplayName>COND_1</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+    </References>
+    <Value>0.01996</Value>
+  </UAVariable>
+
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.COND_2" BrowseName="2:COND_2" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+    <DisplayName>COND_2</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+    </References>
+    <Value>0.01996</Value>
+  </UAVariable>
+
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.COND_3" BrowseName="2:COND_3" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+    <DisplayName>COND_3</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+    </References>
+    <Value>0.01996</Value>
+  </UAVariable>
+
+ <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.COND_4" BrowseName="2:COND_4" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+    <DisplayName>COND_4</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+    </References>
+    <Value>0.01996</Value>
+  </UAVariable>
+
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.UA_1A" BrowseName="2:UA_1A" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+
+    <DisplayName>UA_1A</DisplayName>
+
+    <References>
+
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+
+    </References>
+
+  </UAVariable>
+
+
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.UA_1B" BrowseName="2:UA_1B" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+
+    <DisplayName>UA_1B</DisplayName>
+
+    <References>
+
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+
+    </References>
+
+  </UAVariable>
+
+
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.UA_1C" BrowseName="2:UA_1C" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+
+    <DisplayName>UA_1C</DisplayName>
+
+    <References>
+
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+
+    </References>
+
+  </UAVariable>
+
+
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.UA_2A" BrowseName="2:UA_2A" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+
+    <DisplayName>UA_2A</DisplayName>
+
+    <References>
+
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+
+    </References>
+
+  </UAVariable>
+
+
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.UA_2B" BrowseName="2:UA_2B" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+
+    <DisplayName>UA_2B</DisplayName>
+
+    <References>
+
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+
+    </References>
+
+  </UAVariable>
+
+
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.UA_2C" BrowseName="2:UA_2C" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+
+    <DisplayName>UA_2C</DisplayName>
+
+    <References>
+
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+
+    </References>
+
+  </UAVariable>
+
+
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.UA_3A" BrowseName="2:UA_3A" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+
+    <DisplayName>UA_3A</DisplayName>
+
+    <References>
+
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+
+    </References>
+
+  </UAVariable>
+
+
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.UA_3B" BrowseName="2:UA_3B" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+
+    <DisplayName>UA_3B</DisplayName>
+
+    <References>
+
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+
+    </References>
+
+  </UAVariable>
+
+
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.UA_3C" BrowseName="2:UA_3C" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+
+    <DisplayName>UA_3C</DisplayName>
+
+    <References>
+
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+
+    </References>
+
+  </UAVariable>
+
+
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.UA_4A" BrowseName="2:UA_4A" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+
+    <DisplayName>UA_4A</DisplayName>
+
+    <References>
+
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+
+    </References>
+
+  </UAVariable>
+
+
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.UA_4B" BrowseName="2:UA_4B" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+
+    <DisplayName>UA_4B</DisplayName>
+
+    <References>
+
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+
+    </References>
+
+  </UAVariable>
+
+
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.UA_4C" BrowseName="2:UA_4C" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Float" AccessLevel="3" UserAccessLevel="3">
+
+    <DisplayName>UA_4C</DisplayName>
+
+    <References>
+
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+
+    </References>
+
+  </UAVariable>
+
+  <UAVariable NodeId="ns=2;s=TBIOSMB2DELTAV.STATUS" BrowseName="2:STATUS" ParentNodeId="ns=2;s=TBIOSMB2DELTAV" DataType="Int16" AccessLevel="3" UserAccessLevel="3">
+    <DisplayName>STATUS</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TBIOSMB2DELTAV</Reference>
+    </References>
+    <Value>1</Value>
+  </UAVariable>
+
+  <!-- Variables for TDELTAV2BIOSMB -->
+  <UAVariable NodeId="ns=2;s=TDELTAV2BIOSMB.START" BrowseName="2:START" ParentNodeId="ns=2;s=TDELTAV2BIOSMB" DataType="Boolean" AccessLevel="3" UserAccessLevel="3">
+    <DisplayName>START</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TDELTAV2BIOSMB</Reference>
+    </References>
+    <Value>False</Value>
+  </UAVariable>
+
+  <UAVariable NodeId="ns=2;s=TDELTAV2BIOSMB.STOP" BrowseName="2:STOP" ParentNodeId="ns=2;s=TDELTAV2BIOSMB" DataType="Boolean" AccessLevel="3" UserAccessLevel="3">
+    <DisplayName>STOP</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TDELTAV2BIOSMB</Reference>
+    </References>
+    <Value>False</Value>
+  </UAVariable>
+
+  <UAVariable NodeId="ns=2;s=TDELTAV2BIOSMB.PAUSE" BrowseName="2:PAUSE" ParentNodeId="ns=2;s=TDELTAV2BIOSMB" DataType="Boolean" AccessLevel="3" UserAccessLevel="3">
+    <DisplayName>PAUSE</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TDELTAV2BIOSMB</Reference>
+    </References>
+    <Value>False</Value>
+  </UAVariable>
+
+  <UAVariable NodeId="ns=2;s=TDELTAV2BIOSMB.RESUME" BrowseName="2:RESUME" ParentNodeId="ns=2;s=TDELTAV2BIOSMB" DataType="Boolean" AccessLevel="3" UserAccessLevel="3">
+    <DisplayName>RESUME</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TDELTAV2BIOSMB</Reference>
+    </References>
+    <Value>False</Value>
+  </UAVariable>
+
+  <UAVariable NodeId="ns=2;s=TDELTAV2BIOSMB.NEXTMETHOD" BrowseName="2:NEXTMETHOD" ParentNodeId="ns=2;s=TDELTAV2BIOSMB" DataType="Boolean" AccessLevel="3" UserAccessLevel="3">
+    <DisplayName>NEXTMETHOD</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TDELTAV2BIOSMB</Reference>
+    </References>
+    <Value>False</Value>
+  </UAVariable>
+
+  <UAVariable NodeId="ns=2;s=TDELTAV2BIOSMB.SELECTMETHOD" BrowseName="2:SELECTMETHOD" ParentNodeId="ns=2;s=TDELTAV2BIOSMB" DataType="Int16" AccessLevel="3" UserAccessLevel="3">
+    <DisplayName>SELECTMETHOD</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=2;s=TDELTAV2BIOSMB</Reference>
+    </References>
+    <Value>0</Value>
+  </UAVariable>
+
+</UANodeSet>
