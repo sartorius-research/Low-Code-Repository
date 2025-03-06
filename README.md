@@ -4,12 +4,12 @@ Repository of Node-RED Low-Code Use Cases
 1. Online model deployment and integration into a SCADA system
 2. Data Dashboarding and Monitoring
 3. Interfacing of Equipment and Flow Control Automation for Multi-Column Chromatography Systems
-5. Setup up of a Digital Equipment Representation
+5. Setup up of a Digital Equipment Representation <br>
 ![image](https://github.com/user-attachments/assets/0c8b4323-4efa-448c-aaf6-21c6a515c137)
 
 ### OPC UA Server Configuration
 
-The following JSON configuration is for setting up a Digital Representation OPC UA server in Node-RED (use example XML for testing; stored in the nodeset directory).
+The following JSON configuration is for setting up a Digital Representation OPC UA server in Node-RED (use example BioSMB_DigitalRepresentation.xml for testing; nneds to be stored in the nodeset directory).
 
 ```json
 [
