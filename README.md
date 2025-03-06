@@ -247,7 +247,7 @@ The following JSON configuration is for setting up a Digital Representation OPC 
         "type": "OpcUa-Server",
         "z": "11c6928fc2121e12",
         "port": "53889",
-        "name": "BioSMB Digital Representation",
+        "name": "",
         "endpoint": "",
         "users": "users.json",
         "nodesetDir": "/home/pi/.node-red/",
@@ -277,9 +277,11 @@ The following JSON configuration is for setting up a Digital Representation OPC 
         "maxMessageSize": 4096,
         "maxBufferSize": 4096,
         "maxSessions": 20,
-        "x": 1590,
-        "y": 340,
-        "wires": [[]]
+        "x": 460,
+        "y": 220,
+        "wires": [
+            []
+        ]
     }
 ]
 ```
