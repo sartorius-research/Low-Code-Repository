@@ -7,6 +7,11 @@ Repository of Node-RED Low-Code Use Cases
 5. Setup up of a Digital Equipment Representation
 ![image](https://github.com/user-attachments/assets/0c8b4323-4efa-448c-aaf6-21c6a515c137)
 
+### OPC UA Server Configuration
+
+The following JSON configuration is for setting up a Digital Representation OPC UA server in Node-RED (use example XML for testing; stored in the nodeset directory).
+
+```json
 [
     {
         "id": "bf0bd88fcc282f5e",
@@ -45,10 +50,7 @@ Repository of Node-RED Low-Code Use Cases
         "maxSessions": 20,
         "x": 1590,
         "y": 340,
-        "wires": [
-            []
-        ]
+        "wires": [[]]
     }
 ]
-
-
+```
