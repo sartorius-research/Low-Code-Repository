@@ -7,8 +7,6 @@ Repository of Node-RED Low-Code Use Cases
 5. Setup up of a Digital Equipment Representation <br>
 ![image](https://github.com/user-attachments/assets/0c8b4323-4efa-448c-aaf6-21c6a515c137)
 
-### OPC UA Server Configuration
-
 The following JSON configuration is for setting up a Digital Representation OPC UA server in Node-RED (use example BioSMB_DigitalRepresentation.xml for testing; nneds to be stored in the nodeset directory).
 
 ```json
