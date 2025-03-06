@@ -233,12 +233,12 @@ This JSON configuration defines an workflow that is retrieving spectroscopy data
 ]
 ```
 
-3. Data Dashboarding and Monitoring <br>
+2. Data Dashboarding and Monitoring <br>
 
 ```json
 
 ```
-5. Interfacing of Equipment and Flow Control Automation for Multi-Column Chromatography Systems <br>
+3. Interfacing of Equipment and Flow Control Automation for Multi-Column Chromatography Systems <br>
 
 ![image](https://github.com/user-attachments/assets/27f385ce-9697-4b5a-9c53-cc47960dcc57)
 
@@ -406,7 +406,7 @@ This JSON configuration defines a workflow that retrieves balance data over TCP/
 ]
 ```
 
-7. Setup up of a Digital Equipment Representation <br>
+4. Setup up of a Digital Equipment Representation <br>
 ![image](https://github.com/user-attachments/assets/885e736f-1c93-4a1a-a487-9bc3ef33cd30)
 
 The following JSON configuration is for setting up a Digital Representation OPC UA server in Node-RED (use example BioSMB_DigitalRepresentation.xml for testing; nneds to be stored in the nodeset directory).
