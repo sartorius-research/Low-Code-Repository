@@ -233,9 +233,180 @@ This JSON configuration defines an workflow that is retrieving spectroscopy data
 ]
 ```
 
-3. Data Dashboarding and Monitoring
-4. Interfacing of Equipment and Flow Control Automation for Multi-Column Chromatography Systems
-5. Setup up of a Digital Equipment Representation <br>
+3. Data Dashboarding and Monitoring <br>
+
+```json
+
+```
+5. Interfacing of Equipment and Flow Control Automation for Multi-Column Chromatography Systems <br>
+
+![image](https://github.com/user-attachments/assets/27f385ce-9697-4b5a-9c53-cc47960dcc57)
+
+
+This JSON configuration defines a workflow that retrieves balance data over TCP/IP, processes it, and sends the appropriate flow speed to a multi-column chromatography device via OPC UA. If the balance value is 55 or lower, the flow speed is set to 2. If the value is 80 or higher, the flow speed is set to 3. For values between 56 and 79, the flow speed is set to 1. The threshold values are exemplary, and IP addresses need to be adjusted according to the specific setup
+
+```json
+[
+    {
+        "id": "3ac596d43f0b4eb3",
+        "type": "tcp request",
+        "z": "ee5efd3a94c49ad5",
+        "name": "",
+        "server": "10.226.54.108",
+        "port": "55555",
+        "out": "time",
+        "splitc": "0",
+        "x": 630,
+        "y": 160,
+        "wires": [
+            [
+                "3a22e9800b9db62a"
+            ]
+        ]
+    },
+    {
+        "id": "3a22e9800b9db62a",
+        "type": "function",
+        "z": "ee5efd3a94c49ad5",
+        "name": "Process TCP Data",
+        "func": "msg.payload = msg.payload.toString().trim();\n\n// Split by space and take the first valid number\nlet parts = msg.payload.split(\" \");\nlet mass = parseFloat(parts[0]);\n\n// Check if it's a valid number\nif (isNaN(mass)) {\n    return null; // Halt flow if not a number\n}\n\nmsg.payload = mass;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 160,
+        "wires": [
+            [
+                "d9d15ae7e39ab16f"
+            ]
+        ]
+    },
+    {
+        "id": "d9d15ae7e39ab16f",
+        "type": "function",
+        "z": "ee5efd3a94c49ad5",
+        "name": "Measurement processing & Flow output",
+        "func": "msg = processMessage(msg);\nreturn msg;\n\nfunction processMessage(msg) {\n    const payload = Number(msg.payload);\n\n    if (payload <= 55) {\n        msg.payload = 2;\n    } else if (payload >= 80) {\n        msg.payload = 3;\n    } else {\n        msg.payload = 1;\n    }\n\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1160,
+        "y": 160,
+        "wires": [
+            [
+                "605eb78ec6254276"
+            ]
+        ]
+    },
+    {
+        "id": "605eb78ec6254276",
+        "type": "OpcUa-Item",
+        "z": "ee5efd3a94c49ad5",
+        "item": "ns=3;s=\"OPC_CMD\".\"SELECTMETHOD\"",
+        "datatype": "Int16",
+        "value": "",
+        "name": "SELECTMETHOD",
+        "x": 670,
+        "y": 280,
+        "wires": [
+            [
+                "cfbf39e397bf1c16"
+            ]
+        ]
+    },
+    {
+        "id": "cfbf39e397bf1c16",
+        "type": "OpcUa-Client",
+        "z": "ee5efd3a94c49ad5",
+        "endpoint": "5a35a0339f86407a",
+        "action": "write",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": 10,
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "useTransport": false,
+        "maxChunkCount": "",
+        "maxMessageSize": "",
+        "receiveBufferSize": "",
+        "sendBufferSize": "",
+        "name": "BioSMB WRITE",
+        "x": 880,
+        "y": 280,
+        "wires": [
+            [
+                "93562acd3a73b685"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "93562acd3a73b685",
+        "type": "debug",
+        "z": "ee5efd3a94c49ad5",
+        "name": "BioSMB READ debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "ecb0204dfecc468b",
+        "type": "comment",
+        "z": "ee5efd3a94c49ad5",
+        "name": "",
+        "info": "Function node that processes balance payload",
+        "x": 820,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "7b1ef21f28bb5155",
+        "type": "comment",
+        "z": "ee5efd3a94c49ad5",
+        "name": "",
+        "info": "Function node that processes incoming mass and gives output based on it",
+        "x": 1060,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "e4d636afc91779b9",
+        "type": "comment",
+        "z": "ee5efd3a94c49ad5",
+        "name": "",
+        "info": "OPC UA Write nodes that write the flow output to the equipment",
+        "x": 860,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "5a35a0339f86407a",
+        "type": "OpcUa-Endpoint",
+        "endpoint": "opc.tcp://10.226.54.118:4840",
+        "secpol": "None",
+        "secmode": "None",
+        "login": false
+    }
+]
+```
+
+7. Setup up of a Digital Equipment Representation <br>
 ![image](https://github.com/user-attachments/assets/885e736f-1c93-4a1a-a487-9bc3ef33cd30)
 
 The following JSON configuration is for setting up a Digital Representation OPC UA server in Node-RED (use example BioSMB_DigitalRepresentation.xml for testing; nneds to be stored in the nodeset directory).
