@@ -1,7 +1,7 @@
 # Low-Code-Repository
-Repository of Node-RED Low-Code Use Cases
+## Repository of Node-RED Low-Code Use Cases
 
-1. Online model deployment and integration into a SCADA system <br>
+# 1. Online model deployment and integration into a SCADA system <br>
 ![image](https://github.com/user-attachments/assets/f78c080b-c8b3-46e8-8736-c357b818c030)
 
 This JSON configuration defines an workflow that is retrieving spectroscopy data, puts it into a model and feeds the model outcome into and OPC UA server that can be accessed by a SCADA system.
@@ -233,7 +233,7 @@ This JSON configuration defines an workflow that is retrieving spectroscopy data
 ]
 ```
 
-2. Data Dashboarding and Monitoring <br>
+# 2. Data Dashboarding and Monitoring <br>
 ![image](https://github.com/user-attachments/assets/f44c8e13-cd7e-4376-ac8a-69bd8e4a6495)
 
 This JSON represents a Node-RED flow designed to ingest spectral data, process it through a model, and visualize the results in real-time using a charting module. Additionally, when the viable cell concentration reaches a critical threshold, the system marks this point on the plot and triggers a notification. This notification is sent via a Telegram bot, which can be accessed through a desktop application or a smartphone app. To ensure proper functionality, IP addresses, Telegram chat IDs, bot credentials, and bot tokens must be generated and configured individually.
@@ -655,7 +655,7 @@ This JSON represents a Node-RED flow designed to ingest spectral data, process i
     }
 ]
 ```
-3. Interfacing of Equipment and Flow Control Automation for Multi-Column Chromatography Systems <br>
+# 3. Interfacing of Equipment and Flow Control Automation for Multi-Column Chromatography Systems <br>
 
 ![image](https://github.com/user-attachments/assets/27f385ce-9697-4b5a-9c53-cc47960dcc57)
 
@@ -823,7 +823,7 @@ This JSON configuration defines a workflow that retrieves balance data over TCP/
 ]
 ```
 
-4. Setup up of a Digital Equipment Representation <br>
+# 4. Setup up of a Digital Equipment Representation <br>
 ![image](https://github.com/user-attachments/assets/885e736f-1c93-4a1a-a487-9bc3ef33cd30)
 
 The following JSON configuration is for setting up a Digital Representation OPC UA server in Node-RED (use example BioSMB_DigitalRepresentation.xml for testing; nneds to be stored in the nodeset directory).
