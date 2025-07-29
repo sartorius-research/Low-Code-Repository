@@ -2,9 +2,7 @@
 ### Repository of Node-RED Low-Code Use Cases
 
 ## 1. Online model deployment and integration into a SCADA system <br>
-![image](<img width="1440" height="480" alt="image" src="https://github.com/user-attachments/assets/a802d055-2e46-4a17-b6ee-e979a22c6d81" />
-
-)
+<img width="1440" height="480" alt="image" src="https://github.com/user-attachments/assets/a802d055-2e46-4a17-b6ee-e979a22c6d81" />
 
 This JSON configuration defines a workflow that retrieves spectroscopy data, processes it through a predictive model, and publishes the model results to an OPC UA server, which can then be accessed by a SCADA system.
 
