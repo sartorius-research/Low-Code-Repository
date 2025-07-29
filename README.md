@@ -6,7 +6,7 @@
 
 This JSON configuration defines a workflow that retrieves spectroscopy data, processes it through a predictive model, and publishes the model results to an OPC UA server, which can then be accessed by a SCADA system.
 
-The setup uses the **[BioPAT® Viamass dielectric spectroscopy probe](https://shop.sartorius.com/de/p/biopatviamass/BioPAT_Viamass)** in combination with the **BioPAT® Viamass Connect Hub** to collect spectroscopy data. The resulting model output is integrated into **[BioPAT® MFCS 4.13](https://www.sartorius.com/en/products/process-analytical-technology/process-control-automation/biobrain-supervise?utm_source=google&utm_medium=cpc&utm_campaign=ww_en_search_PI-Boost_BioPAT-MFCS&gad_source=1&gad_campaignid=10692165010&gclid=Cj0KCQjw4qHEBhCDARIsALYKFNOScObdCQbfh6pU2o4N_CMV3_WFoXDLJhQp0VoiOesVicRQOsTTdIsaAmSDEALw_wcB)** via its **OPC UA client feature**.
+The setup uses the **[BioPAT® Viamass dielectric spectroscopy probe](https://shop.sartorius.com/de/p/biopatviamass/BioPAT_Viamass)** in combination with the **BioPAT® Viamass Connect Hub** to collect spectroscopy data. The resulting model output is integrated into **[BioPAT® MFCS 4.13](https://www.sartorius.com/en/products/process-analytical-technology/process-control-automation/biobrain-supervise?utm_source=google&utm_medium=cpc&utm_campaign=ww_en_search_PI-Boost_BioPAT-MFCS&gad_source=1&gad_campaignid=10692165010&gclid=Cj0KCQjw4qHEBhCDARIsALYKFNOScObdCQbfh6pU2o4N_CMV3_WFoXDLJhQp0VoiOesVicRQOsTTdIsaAmSDEALw_wcB)** via its **OPC UA client feature**. Apart from standard nodes, the flow uses **[node-red-contrib-opcua](https://github.com/mikakaraila/node-red-contrib-opcua)**.
 
 
 ```json
@@ -309,7 +309,7 @@ The setup uses the **[BioPAT® Viamass dielectric spectroscopy probe](https://sh
 <img width="1856" height="740" alt="image" src="https://github.com/user-attachments/assets/035f7c7e-d8de-4e8d-91c6-0cdfab4034c4" />
 
 
-This JSON defines a Node-RED flow that collects spectral data from a **[BioPAT® Viamass dielectric spectroscopy probe](https://shop.sartorius.com/de/p/biopatviamass/BioPAT_Viamass)** via the **BioPAT® Viamass Connect Hub**, processes it with a predictive model, and visualizes the results in real-time. When the viable cell concentration (VCC) crosses a defined threshold, the flow marks the event on the chart and sends a Telegram notification accessible on desktop or mobile.
+This JSON defines a Node-RED flow that collects spectral data from a **[BioPAT® Viamass dielectric spectroscopy probe](https://shop.sartorius.com/de/p/biopatviamass/BioPAT_Viamass)** via the **BioPAT® Viamass Connect Hub**, processes it with a predictive model, and visualizes the results in real-time. When the viable cell concentration (VCC) crosses a defined threshold, the flow marks the event on the chart and sends a Telegram notification accessible on desktop or mobile. Apart from standard nodes, the flow uses **[node-red-contrib-opcua](https://github.com/mikakaraila/node-red-contrib-opcua)** and **[node-red-contrib-telegrambot](https://github.com/windkh/node-red-contrib-telegrambot)** . 
 
 ```json
 [
@@ -802,24 +802,49 @@ This JSON defines a Node-RED flow that collects spectral data from a **[BioPAT®
 ```
 ## 3. Interfacing of Equipment and Flow Control Automation for Multi-Column Chromatography Systems <br>
 
-![image](https://github.com/user-attachments/assets/27f385ce-9697-4b5a-9c53-cc47960dcc57)
+<img width="1765" height="401" alt="image" src="https://github.com/user-attachments/assets/88dad0fc-e7c2-4dd1-9742-1dfc341d643b" />
 
 
-This JSON configuration defines a workflow that retrieves balance data over TCP/IP, processes it, and sends the appropriate flow speed to a multi-column chromatography device via OPC UA. If the balance value is 55 or lower, the flow speed is set to 2. If the value is 80 or higher, the flow speed is set to 3. For values between 56 and 79, the flow speed is set to 1. The threshold values are exemplary, and IP addresses need to be adjusted according to the specific setup
+
+This JSON defines a Node-RED flow that collects weight data from a Sartorius **[Cubis II balance](https://www.sartorius.com/en/products/weighing/laboratory-balances/premium-level-balances/cubis-ii-de)** via TCP/IP, processes it, and sends the corresponding flow speed to a **[Resolute BioSMB PD multi-column chromatography system](https://shop.sartorius.com/de/p/resolute-biosmb-pd/BIOSMB-PD-LD100B)** via OPC UA.
+
+If the balance reads ≤ 55, the flow speed is set to 2.
+For 56–79, the flow speed is 1, and for ≥ 80, it is 3.
+
+Thresholds are exemplary, and IP addresses must be adapted to the specific setup. Apart from standard nodes, the flow uses **[node-red-contrib-opcua](https://github.com/mikakaraila/node-red-contrib-opcua)**
 
 ```json
 [
     {
+        "id": "f328cbde862e164f",
+        "type": "group",
+        "z": "54683189a563b4b1",
+        "name": "Read Data",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "3ac596d43f0b4eb3",
+            "3a22e9800b9db62a",
+            "ecb0204dfecc468b"
+        ],
+        "x": 534,
+        "y": 1539,
+        "w": 492,
+        "h": 142
+    },
+    {
         "id": "3ac596d43f0b4eb3",
         "type": "tcp request",
-        "z": "ee5efd3a94c49ad5",
+        "z": "54683189a563b4b1",
+        "g": "f328cbde862e164f",
         "name": "",
         "server": "10.226.54.108",
         "port": "55555",
         "out": "time",
         "splitc": "0",
-        "x": 630,
-        "y": 160,
+        "x": 670,
+        "y": 1640,
         "wires": [
             [
                 "3a22e9800b9db62a"
@@ -829,17 +854,17 @@ This JSON configuration defines a workflow that retrieves balance data over TCP/
     {
         "id": "3a22e9800b9db62a",
         "type": "function",
-        "z": "ee5efd3a94c49ad5",
+        "z": "54683189a563b4b1",
+        "g": "f328cbde862e164f",
         "name": "Process TCP Data",
         "func": "msg.payload = msg.payload.toString().trim();\n\n// Split by space and take the first valid number\nlet parts = msg.payload.split(\" \");\nlet mass = parseFloat(parts[0]);\n\n// Check if it's a valid number\nif (isNaN(mass)) {\n    return null; // Halt flow if not a number\n}\n\nmsg.payload = mass;\nreturn msg;",
         "outputs": 1,
-        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 860,
-        "y": 160,
+        "x": 910,
+        "y": 1640,
         "wires": [
             [
                 "d9d15ae7e39ab16f"
@@ -847,19 +872,47 @@ This JSON configuration defines a workflow that retrieves balance data over TCP/
         ]
     },
     {
+        "id": "ecb0204dfecc468b",
+        "type": "comment",
+        "z": "54683189a563b4b1",
+        "g": "f328cbde862e164f",
+        "name": "",
+        "info": "Function node that processes balance payload",
+        "x": 880,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "889493cccd9f34f8",
+        "type": "group",
+        "z": "54683189a563b4b1",
+        "name": "Process Data & Model Application",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "d9d15ae7e39ab16f",
+            "7b1ef21f28bb5155"
+        ],
+        "x": 1054,
+        "y": 1539,
+        "w": 372,
+        "h": 142
+    },
+    {
         "id": "d9d15ae7e39ab16f",
         "type": "function",
-        "z": "ee5efd3a94c49ad5",
+        "z": "54683189a563b4b1",
+        "g": "889493cccd9f34f8",
         "name": "Measurement processing & Flow output",
         "func": "msg = processMessage(msg);\nreturn msg;\n\nfunction processMessage(msg) {\n    const payload = Number(msg.payload);\n\n    if (payload <= 55) {\n        msg.payload = 2;\n    } else if (payload >= 80) {\n        msg.payload = 3;\n    } else {\n        msg.payload = 1;\n    }\n\n    return msg;\n}",
         "outputs": 1,
-        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1160,
-        "y": 160,
+        "x": 1240,
+        "y": 1640,
         "wires": [
             [
                 "605eb78ec6254276"
@@ -867,15 +920,46 @@ This JSON configuration defines a workflow that retrieves balance data over TCP/
         ]
     },
     {
+        "id": "7b1ef21f28bb5155",
+        "type": "comment",
+        "z": "54683189a563b4b1",
+        "g": "889493cccd9f34f8",
+        "name": "",
+        "info": "Function node that processes incoming mass and gives output based on it",
+        "x": 1140,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "0df1f57272bdfb64",
+        "type": "group",
+        "z": "54683189a563b4b1",
+        "name": "Write Data",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "605eb78ec6254276",
+            "cfbf39e397bf1c16",
+            "93562acd3a73b685",
+            "e4d636afc91779b9"
+        ],
+        "x": 1454,
+        "y": 1539,
+        "w": 692,
+        "h": 142
+    },
+    {
         "id": "605eb78ec6254276",
         "type": "OpcUa-Item",
-        "z": "ee5efd3a94c49ad5",
+        "z": "54683189a563b4b1",
+        "g": "0df1f57272bdfb64",
         "item": "ns=3;s=\"OPC_CMD\".\"SELECTMETHOD\"",
         "datatype": "Int16",
         "value": "",
         "name": "SELECTMETHOD",
-        "x": 670,
-        "y": 280,
+        "x": 1570,
+        "y": 1580,
         "wires": [
             [
                 "cfbf39e397bf1c16"
@@ -885,7 +969,8 @@ This JSON configuration defines a workflow that retrieves balance data over TCP/
     {
         "id": "cfbf39e397bf1c16",
         "type": "OpcUa-Client",
-        "z": "ee5efd3a94c49ad5",
+        "z": "54683189a563b4b1",
+        "g": "0df1f57272bdfb64",
         "endpoint": "5a35a0339f86407a",
         "action": "write",
         "deadbandtype": "a",
@@ -895,25 +980,20 @@ This JSON configuration defines a workflow that retrieves balance data over TCP/
         "certificate": "n",
         "localfile": "",
         "localkeyfile": "",
-        "useTransport": false,
-        "maxChunkCount": "",
-        "maxMessageSize": "",
-        "receiveBufferSize": "",
-        "sendBufferSize": "",
         "name": "BioSMB WRITE",
-        "x": 880,
-        "y": 280,
+        "x": 1780,
+        "y": 1580,
         "wires": [
             [
                 "93562acd3a73b685"
-            ],
-            []
+            ]
         ]
     },
     {
         "id": "93562acd3a73b685",
         "type": "debug",
-        "z": "ee5efd3a94c49ad5",
+        "z": "54683189a563b4b1",
+        "g": "0df1f57272bdfb64",
         "name": "BioSMB READ debug",
         "active": true,
         "tosidebar": true,
@@ -923,38 +1003,19 @@ This JSON configuration defines a workflow that retrieves balance data over TCP/
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1100,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "ecb0204dfecc468b",
-        "type": "comment",
-        "z": "ee5efd3a94c49ad5",
-        "name": "",
-        "info": "Function node that processes balance payload",
-        "x": 820,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "7b1ef21f28bb5155",
-        "type": "comment",
-        "z": "ee5efd3a94c49ad5",
-        "name": "",
-        "info": "Function node that processes incoming mass and gives output based on it",
-        "x": 1060,
-        "y": 100,
+        "x": 2000,
+        "y": 1580,
         "wires": []
     },
     {
         "id": "e4d636afc91779b9",
         "type": "comment",
-        "z": "ee5efd3a94c49ad5",
+        "z": "54683189a563b4b1",
+        "g": "0df1f57272bdfb64",
         "name": "",
         "info": "OPC UA Write nodes that write the flow output to the equipment",
-        "x": 860,
-        "y": 340,
+        "x": 1760,
+        "y": 1640,
         "wires": []
     },
     {
@@ -971,7 +1032,7 @@ This JSON configuration defines a workflow that retrieves balance data over TCP/
 ## 4. Setup up of a Digital Equipment Representation <br>
 ![image](https://github.com/user-attachments/assets/885e736f-1c93-4a1a-a487-9bc3ef33cd30)
 
-The following JSON configuration is for setting up a Digital Representation OPC UA server in Node-RED (use example BioSMB_DigitalRepresentation.xml for testing; nneds to be stored in the nodeset directory).
+The following JSON configuration is for setting up a Digital Representation OPC UA server in Node-RED (use example BioSMB_DigitalRepresentation.xml for testing; nneds to be stored in the nodeset directory). The application uses **[node-red-contrib-opcua](https://github.com/mikakaraila/node-red-contrib-opcua)**
 
 ```json
 [
