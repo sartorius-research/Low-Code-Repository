@@ -2,22 +2,46 @@
 ### Repository of Node-RED Low-Code Use Cases
 
 ## 1. Online model deployment and integration into a SCADA system <br>
-![image](https://github.com/user-attachments/assets/f78c080b-c8b3-46e8-8736-c357b818c030)
+![image](<img width="1440" height="480" alt="image" src="https://github.com/user-attachments/assets/a802d055-2e46-4a17-b6ee-e979a22c6d81" />
 
-This JSON configuration defines an workflow that is retrieving spectroscopy data, puts it into a model and feeds the model outcome into and OPC UA server that can be accessed by a SCADA system.
+)
+
+This JSON configuration defines a workflow that retrieves spectroscopy data, processes it through a predictive model, and publishes the model results to an OPC UA server, which can then be accessed by a SCADA system.
+
+The setup uses the **[BioPAT® Viamass dielectric spectroscopy probe](https://shop.sartorius.com/de/p/biopatviamass/BioPAT_Viamass)** in combination with the **BioPAT® Viamass Connect Hub** to collect spectroscopy data. The resulting model output is integrated into **[BioPAT® MFCS 4.13](https://www.sartorius.com/en/products/process-analytical-technology/process-control-automation/biobrain-supervise?utm_source=google&utm_medium=cpc&utm_campaign=ww_en_search_PI-Boost_BioPAT-MFCS&gad_source=1&gad_campaignid=10692165010&gclid=Cj0KCQjw4qHEBhCDARIsALYKFNOScObdCQbfh6pU2o4N_CMV3_WFoXDLJhQp0VoiOesVicRQOsTTdIsaAmSDEALw_wcB)** via its **OPC UA client feature**.
+
 
 ```json
 [
     {
+        "id": "8d134948e9e90563",
+        "type": "group",
+        "z": "54683189a563b4b1",
+        "name": "Read Data",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "86ce3655a71bd54a",
+            "f93a2e6e9baa3255",
+            "a5e9c11330d3b998"
+        ],
+        "x": 394,
+        "y": 219,
+        "w": 652,
+        "h": 142
+    },
+    {
         "id": "86ce3655a71bd54a",
         "type": "OpcUa-Item",
-        "z": "b3712e4a33f45cb9",
+        "z": "54683189a563b4b1",
+        "g": "8d134948e9e90563",
         "item": "ns=5;s=\\\\.\\Futura 02\\Zeroed Averaged Capacitance Values",
         "datatype": "Float Array",
         "value": "",
         "name": "Zeroed Averaged Capacitance values",
-        "x": 770,
-        "y": 360,
+        "x": 570,
+        "y": 320,
         "wires": [
             [
                 "a5e9c11330d3b998"
@@ -25,15 +49,119 @@ This JSON configuration defines an workflow that is retrieving spectroscopy data
         ]
     },
     {
+        "id": "f93a2e6e9baa3255",
+        "type": "comment",
+        "z": "54683189a563b4b1",
+        "g": "8d134948e9e90563",
+        "name": "",
+        "info": "Receiving Spectroscopy Raw Data from OPC UA Server",
+        "x": 480,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "a5e9c11330d3b998",
+        "type": "OpcUa-Client",
+        "z": "54683189a563b4b1",
+        "g": "8d134948e9e90563",
+        "endpoint": "afc2f353b73c1625",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": 10,
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "folderName4PKI": "",
+        "name": "OPC UA Client for Viamass",
+        "x": 900,
+        "y": 320,
+        "wires": [
+            [
+                "fdbdf326d02dae13"
+            ]
+        ]
+    },
+    {
+        "id": "afc2f353b73c1625",
+        "type": "OpcUa-Endpoint",
+        "endpoint": "opc.tcp://localhost:53882/",
+        "secpol": "None",
+        "secmode": "None",
+        "none": false,
+        "login": false,
+        "usercert": false,
+        "usercertificate": "",
+        "userprivatekey": ""
+    },
+    {
+        "id": "f8d589616abe9ecd",
+        "type": "group",
+        "z": "54683189a563b4b1",
+        "name": "Process Data",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "fdbdf326d02dae13"
+        ],
+        "x": 1074,
+        "y": 279,
+        "w": 252,
+        "h": 82
+    },
+    {
+        "id": "fdbdf326d02dae13",
+        "type": "function",
+        "z": "54683189a563b4b1",
+        "g": "f8d589616abe9ecd",
+        "name": "Spectroscopy Model",
+        "func": "msg.payload = -1.11411+msg.payload[0]*-0.0846305+msg.payload[1]*-0.0693173+msg.payload[2]*-0.0509203+msg.payload[3]*-0.0266838+msg.payload[4]*-0.00368787+msg.payload[5]*0.0244135+msg.payload[6]*0.0543474+msg.payload[7]*0.0815575+msg.payload[8]*0.100042+msg.payload[9]*0.109601+msg.payload[10]*0.107292+msg.payload[11]*0.0949137+msg.payload[12]*0.0787177+msg.payload[13]*0.0704221+msg.payload[14]*0.0454615+msg.payload[15]*0.0338642+msg.payload[16]*0.0239638+msg.payload[17]*0.0169988+msg.payload[18]*0.0131833+msg.payload[19]*0.00917408+msg.payload[20]*0.00747873+msg.payload[21]*0.00519937+msg.payload[22]*0.00307098+msg.payload[23]*0.00225113+msg.payload[24]*0.00143756\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1200,
+        "y": 320,
+        "wires": [
+            [
+                "ecb42cf9b37451bf"
+            ]
+        ]
+    },
+    {
+        "id": "51aae4e9f4f81bda",
+        "type": "group",
+        "z": "54683189a563b4b1",
+        "name": "Write Data",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "ecb42cf9b37451bf",
+            "a65d9f5dd6f30b03",
+            "67cd2dd521a49f6e"
+        ],
+        "x": 1344,
+        "y": 219,
+        "w": 402,
+        "h": 142
+    },
+    {
         "id": "ecb42cf9b37451bf",
         "type": "OpcUa-Item",
-        "z": "b3712e4a33f45cb9",
+        "z": "54683189a563b4b1",
+        "g": "51aae4e9f4f81bda",
         "item": "ns=1;s=viamass-VCC",
         "datatype": "Double",
         "value": "",
         "name": "viamass-VCC",
-        "x": 1650,
-        "y": 360,
+        "x": 1450,
+        "y": 320,
         "wires": [
             [
                 "a65d9f5dd6f30b03"
@@ -43,7 +171,8 @@ This JSON configuration defines an workflow that is retrieving spectroscopy data
     {
         "id": "a65d9f5dd6f30b03",
         "type": "OpcUa-Client",
-        "z": "b3712e4a33f45cb9",
+        "z": "54683189a563b4b1",
+        "g": "51aae4e9f4f81bda",
         "endpoint": "afc2f353b73c1625",
         "action": "write",
         "deadbandtype": "a",
@@ -55,43 +184,48 @@ This JSON configuration defines an workflow that is retrieving spectroscopy data
         "localkeyfile": "",
         "securitymode": "None",
         "securitypolicy": "None",
-        "useTransport": false,
-        "maxChunkCount": 1,
-        "maxMessageSize": 8192,
-        "receiveBufferSize": 8192,
-        "sendBufferSize": 8192,
+        "folderName4PKI": "",
         "name": "",
-        "x": 1840,
-        "y": 360,
+        "x": 1640,
+        "y": 320,
         "wires": [
-            [],
             []
         ]
     },
     {
-        "id": "fdbdf326d02dae13",
-        "type": "function",
-        "z": "b3712e4a33f45cb9",
-        "name": "Spectroscopy Model",
-        "func": "msg.payload = -1.11411+msg.payload[0]*-0.0846305+msg.payload[1]*-0.0693173+msg.payload[2]*-0.0509203+msg.payload[3]*-0.0266838+msg.payload[4]*-0.00368787+msg.payload[5]*0.0244135+msg.payload[6]*0.0543474+msg.payload[7]*0.0815575+msg.payload[8]*0.100042+msg.payload[9]*0.109601+msg.payload[10]*0.107292+msg.payload[11]*0.0949137+msg.payload[12]*0.0787177+msg.payload[13]*0.0704221+msg.payload[14]*0.0454615+msg.payload[15]*0.0338642+msg.payload[16]*0.0239638+msg.payload[17]*0.0169988+msg.payload[18]*0.0131833+msg.payload[19]*0.00917408+msg.payload[20]*0.00747873+msg.payload[21]*0.00519937+msg.payload[22]*0.00307098+msg.payload[23]*0.00225113+msg.payload[24]*0.00143756\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1400,
-        "y": 360,
-        "wires": [
-            [
-                "ecb42cf9b37451bf"
-            ]
-        ]
+        "id": "67cd2dd521a49f6e",
+        "type": "comment",
+        "z": "54683189a563b4b1",
+        "g": "51aae4e9f4f81bda",
+        "name": "",
+        "info": "OPC UA Node ID that is receiving the model outcome and can be accessed by SCADA system.",
+        "x": 1430,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "cbe5c6e01e0f5bae",
+        "type": "group",
+        "z": "54683189a563b4b1",
+        "name": "Server",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "4bb1da24c6e28510",
+            "49e1b80836fc1f7d",
+            "05e83eef11cdf9dc"
+        ],
+        "x": 394,
+        "y": 419,
+        "w": 572,
+        "h": 142
     },
     {
         "id": "4bb1da24c6e28510",
         "type": "inject",
-        "z": "b3712e4a33f45cb9",
+        "z": "54683189a563b4b1",
+        "g": "cbe5c6e01e0f5bae",
         "name": "AddVariable=viamass-VCC",
         "props": [
             {
@@ -109,8 +243,8 @@ This JSON configuration defines an workflow that is retrieving spectroscopy data
         "topic": "ns=1;s=viamass-VCC;datatype=Double",
         "payload": "{\"opcuaCommand\":\"addVariable\"}",
         "payloadType": "json",
-        "x": 760,
-        "y": 540,
+        "x": 560,
+        "y": 520,
         "wires": [
             [
                 "49e1b80836fc1f7d"
@@ -120,7 +254,8 @@ This JSON configuration defines an workflow that is retrieving spectroscopy data
     {
         "id": "49e1b80836fc1f7d",
         "type": "OpcUa-Server",
-        "z": "b3712e4a33f45cb9",
+        "z": "54683189a563b4b1",
+        "g": "cbe5c6e01e0f5bae",
         "port": "53883",
         "name": "LocalViamassServer",
         "endpoint": "",
@@ -151,86 +286,25 @@ This JSON configuration defines an workflow that is retrieving spectroscopy data
         "maxConnectionsPerEndpoint": 20,
         "maxMessageSize": 4096,
         "maxBufferSize": 4096,
-        "maxSessions": 20,
-        "x": 1040,
-        "y": 540,
+        "x": 840,
+        "y": 520,
         "wires": [
             []
         ]
-    },
-    {
-        "id": "f93a2e6e9baa3255",
-        "type": "comment",
-        "z": "b3712e4a33f45cb9",
-        "name": "",
-        "info": "Receiving Spectroscopy Raw Data from OPC UA Server",
-        "x": 680,
-        "y": 300,
-        "wires": []
     },
     {
         "id": "05e83eef11cdf9dc",
         "type": "comment",
-        "z": "b3712e4a33f45cb9",
+        "z": "54683189a563b4b1",
+        "g": "cbe5c6e01e0f5bae",
         "name": "",
         "info": "OPC UA Server that is initiated to offer the outcome of the model",
-        "x": 680,
-        "y": 480,
+        "x": 480,
+        "y": 460,
         "wires": []
-    },
-    {
-        "id": "67cd2dd521a49f6e",
-        "type": "comment",
-        "z": "b3712e4a33f45cb9",
-        "name": "",
-        "info": "OPC UA Node ID that is receiving the model outcome and can be accessed by SCADA system.",
-        "x": 1620,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "a5e9c11330d3b998",
-        "type": "OpcUa-Client",
-        "z": "b3712e4a33f45cb9",
-        "endpoint": "afc2f353b73c1625",
-        "action": "write",
-        "deadbandtype": "a",
-        "deadbandvalue": 1,
-        "time": 10,
-        "timeUnit": "s",
-        "certificate": "n",
-        "localfile": "",
-        "localkeyfile": "",
-        "securitymode": "None",
-        "securitypolicy": "None",
-        "useTransport": false,
-        "maxChunkCount": 1,
-        "maxMessageSize": 8192,
-        "receiveBufferSize": 8192,
-        "sendBufferSize": 8192,
-        "name": "OPC UA Client for Viamass",
-        "x": 1100,
-        "y": 360,
-        "wires": [
-            [
-                "fdbdf326d02dae13"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "afc2f353b73c1625",
-        "type": "OpcUa-Endpoint",
-        "endpoint": "opc.tcp://localhost:53882/",
-        "secpol": "None",
-        "secmode": "None",
-        "none": false,
-        "login": false,
-        "usercert": false,
-        "usercertificate": "",
-        "userprivatekey": ""
     }
 ]
+
 ```
 
 ## 2. Data Dashboarding and Monitoring <br>
