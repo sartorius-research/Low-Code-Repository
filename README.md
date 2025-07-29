@@ -811,7 +811,7 @@ This JSON defines a Node-RED flow that collects weight data from a Sartorius **[
 If the balance reads ≤ 55, the flow speed is set to 2.
 For 56–79, the flow speed is 1, and for ≥ 80, it is 3.
 
-Thresholds are exemplary, and IP addresses must be adapted to the specific setup. Apart from standard nodes, the flow uses **[node-red-contrib-opcua](https://github.com/mikakaraila/node-red-contrib-opcua)**
+Thresholds are exemplary, and IP addresses must be adapted to the specific setup. Apart from standard nodes, the flow uses **[node-red-contrib-opcua](https://github.com/mikakaraila/node-red-contrib-opcua)**.
 
 ```json
 [
@@ -1032,7 +1032,7 @@ Thresholds are exemplary, and IP addresses must be adapted to the specific setup
 ## 4. Setup up of a Digital Equipment Representation <br>
 ![image](https://github.com/user-attachments/assets/885e736f-1c93-4a1a-a487-9bc3ef33cd30)
 
-The following JSON configuration is for setting up a Digital Representation OPC UA server in Node-RED (use example BioSMB_DigitalRepresentation.xml for testing; nneds to be stored in the nodeset directory). The application uses **[node-red-contrib-opcua](https://github.com/mikakaraila/node-red-contrib-opcua)**
+The following JSON configuration is for setting up a Digital Representation OPC UA server in Node-RED (use example BioSMB_DigitalRepresentation.xml for testing; needs to be stored in the nodeset directory). The example highlights functionalities of the  The application uses **[node-red-contrib-opcua](https://github.com/mikakaraila/node-red-contrib-opcua)**.
 
 ```json
 [
